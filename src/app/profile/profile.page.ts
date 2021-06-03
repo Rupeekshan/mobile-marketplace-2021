@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { FirebaseUserService } from '../services/firebase-user.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,8 +8,28 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  userDetails: any;
+  constructor(
+    private fbAuthService: AuthenticationService,
+    public firebaseService: FirebaseUserService
+  ) {
 
-  constructor(private fbAuthService: AuthenticationService) { }
+    this.firebaseService.get_transactions().subscribe((res) => {
+      this.userDetails = res.map(e => {
+        return {
+          id: e.payload.doc.id,
+          email: e.payload.doc.data()['email'],
+          fname: e.payload.doc.data()['fname'],
+          lname: e.payload.doc.data()['lname'],
+          num: e.payload.doc.data()['num'],
+        }
+      })
+      console.log(this.userDetails);
+    }, (err: any) => {
+      console.log(err);
+    })
+
+  }
 
   ngOnInit() {
   }

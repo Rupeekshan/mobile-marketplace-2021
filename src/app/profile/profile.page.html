@@ -17,12 +17,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary">
-      <ion-icon name="create-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<ion-content *ngFor="let data of userDetails">
   <ion-row>
     <img src="../../assets/icon/favicon.png" class="img-center" />
   </ion-row>
@@ -30,16 +25,23 @@
   <ion-list lines="full" class="ion-no-margin">
     <ion-item>
       <ion-label position="fixed" color="secondary">Name</ion-label>
-      <ion-input readonly>Rupeekshan Maheswaran</ion-input>
+      <ion-input readonly>{{data.fname}}</ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="fixed" color="secondary">Email</ion-label>
-      <ion-input readonly>rnrupeekshan@gmail.com</ion-input>
+      <ion-input readonly>{{data.lname}}</ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="fixed" color="secondary">Password</ion-label>
-      <ion-input readonly>Sample password</ion-input>
+      <ion-input readonly>{{data.num}}</ion-input>
     </ion-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" routerLink="../edit-profile">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
 

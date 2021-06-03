@@ -11,8 +11,8 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from 'src/environments/environment';
 import {AngularFirestore} from '@angular/fire/firestore';
-import { Camera } from '@ionic-native/Camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+// import { Camera } from '@ionic-native/Camera/ngx';
+// import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +20,8 @@ import { File } from '@ionic-native/file/ngx';
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
   AngularFireModule.initializeApp(environment.firebaseConfig)],
   providers: [
-    Camera,
-    File,
+    // Camera,
+    // File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

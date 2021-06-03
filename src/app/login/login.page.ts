@@ -24,7 +24,7 @@ export class LoginPage implements OnInit {
       //call authentication service method to login
       this.authService.SignIn(this.email, this.password)
         .then((results)=>{
-          console.log(results);
+          console.log('Logged in');
           if(results.user && results.user.emailVerified){
             console.log(results.user);
             this.router.navigate(['']);

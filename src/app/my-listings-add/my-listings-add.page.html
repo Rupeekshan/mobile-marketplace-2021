@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button color="light" routerLink="../my-listings">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Add Item</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-photo-upload></app-photo-upload>
+  <ion-card>
+    <ion-item>
+      <ion-label position="floating">Item Name</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Outlet Name</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Price (Rs.)</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Item Photo</ion-label>
+      <ion-input type="file"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <!-- <app-photo-upload></app-photo-upload> -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

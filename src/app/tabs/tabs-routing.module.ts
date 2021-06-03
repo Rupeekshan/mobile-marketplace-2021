@@ -24,8 +24,8 @@ const routes: Routes = [
             loadChildren: () => import('../my-listings-add/my-listings-add.module').then( m => m.MyListingsAddPageModule)
           },
           {
-            path: 'tab2',
-            loadChildren: () => import('../tab2/tab2.module').then( m => m.Tab2PageModule)
+            path: 'edit-profile',
+            loadChildren: () => import('../edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
           },
               {
                 path: '',
