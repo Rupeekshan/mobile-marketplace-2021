@@ -1,0 +1,7 @@
+{
+  "name": "mobile-marketplace",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

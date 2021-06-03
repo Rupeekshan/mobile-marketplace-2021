@@ -1,0 +1,27 @@
+
+<ion-card *ngIf="uploadStatus"s>
+  <ion-card-content>
+    <div>
+      <form method="post" enctype="multipart/form-data">
+        <div>
+          <div><b>Upload photo</b></div> <br />
+          <input type="file" (change)="uploadPhoto($event)" accept=".png,.jpg" />
+        </div>
+      </form>
+    </div>
+  </ion-card-content>
+</ion-card>
+
+
+<div *ngIf="barStatus">
+  <ion-progress-bar type="indeterminate" color="success"></ion-progress-bar>
+</div>
+
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="danger" (click)="showActionSheet()">
+    <!-- <input type="file" class="hideInput" (change)="uploadPhoto($event)" accept=".png,.jpg" /> -->
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+

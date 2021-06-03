@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>My Listings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-row>
+      <ion-col size="5">
+        <img src="../../assets/icon/favicon.png" />
+      </ion-col>
+      <ion-col>
+        <ion-card-header>
+          <ion-card-subtitle>Season54</ion-card-subtitle>
+          <ion-card-title>Chicken Kothu</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-badge color="danger">
+            <small>Rs. </small>
+            980.00
+          </ion-badge>
+        </ion-card-content>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" routerLink="../my-listings-add">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
