@@ -4,9 +4,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseUserService {
 
-  collectionName = 'user-details';
+export class FirebaseItemService {
+
+  collectionName = 'item-details';
 
   constructor(
     private firestore: AngularFirestore

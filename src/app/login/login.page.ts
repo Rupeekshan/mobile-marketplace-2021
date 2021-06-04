@@ -11,6 +11,7 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
   email = '';
   password = '';
   errorMessage='';
@@ -27,7 +28,7 @@ export class LoginPage implements OnInit {
           console.log('Logged in');
           if(results.user && results.user.emailVerified){
             console.log(results.user);
-            this.router.navigate(['']);
+            this.router.navigateByUrl('');
           }
           else{
             this.router.navigateByUrl('/register');
