@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseItemService } from '../services/firebase-item.service';
 
-interface UserData {
+interface UserItemData {
   Name: string;
   Outlet: string;
   Price: number;
@@ -18,7 +19,7 @@ interface UserData {
 export class MyListingsAddPage implements OnInit {
 
   userList = [];
-  userData: UserData;
+  userItemData: UserItemData;
   userForm: FormGroup;
 
   constructor(
@@ -26,7 +27,7 @@ export class MyListingsAddPage implements OnInit {
     private router: Router,
     public fb: FormBuilder
   ) {
-    this.userData = {} as UserData;
+    this.userItemData = {} as UserItemData;
   }
 
   ngOnInit() {
@@ -35,22 +36,6 @@ export class MyListingsAddPage implements OnInit {
       Outlet: ['', [Validators.required]],
       Price: ['', [Validators.required]]
     });
-
-    // this.firebaseService.get_transactions().subscribe(data => {
-
-    //   this.userList = data.map(e => ({
-    //       id: e.payload.doc.id,
-    //       isEdit: false,
-    //       Name: e.payload.doc.data()['Name'],
-    //       Outlet: e.payload.doc.data()['Outlet'],
-    //       Price: e.payload.doc.data()['Price'],
-    //     }));
-    //   console.log(this.userList);
-    //   console.log('reading works - add-page');
-
-    // }, (err: any) => {
-    //   console.log(err);
-    // });
   }
 
 

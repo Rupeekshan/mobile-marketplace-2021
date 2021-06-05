@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { FirebaseItemService } from '../services/firebase-item.service';
@@ -52,7 +53,7 @@ export class MyListingsPage implements OnInit {
   }
 
   updateRecord(recordRow) {
-    let record = {};
+    const record = {};
     record['Name'] = recordRow.EditName;
     record['Outlet'] = recordRow.EditOutlet;
     record['Price'] = recordRow.EditPrice;

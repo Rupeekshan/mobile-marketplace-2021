@@ -1,44 +1,81 @@
 <ion-header>
   <ion-toolbar color="secondary">
-
-    <!-- GO BACK BUTTON
-    <ion-buttons slot="start">
-      <ion-button color="light">
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
     <ion-title>Profile</ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button color="light">
-        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
     <ion-button slot="end" color="tertiary" (click)="logoutAction()">Log out</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngFor="let data of userDetails">
-  <ion-row>
-    <img src="../../assets/icon/favicon.png" class="img-center" />
-  </ion-row>
+<ion-content  *ngFor="let data of profList">
+  <ion-card>
 
-  <ion-list lines="full" class="ion-no-margin">
-    <ion-item>
-      <ion-label position="fixed" color="secondary">Name</ion-label>
-      <ion-input readonly>{{data.fname}}</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="fixed" color="secondary">Email</ion-label>
-      <ion-input readonly>{{data.lname}}</ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="fixed" color="secondary">Password</ion-label>
-      <ion-input readonly>{{data.num}}</ion-input>
-    </ion-item>
-  </ion-list>
+    <ion-card-content>
+        <ion-row>
+          <img src="../../assets/icon/favicon.png" class="img-center" />
+        </ion-row>
+        <span *ngIf="!data.isEdit; else elseBlock">
+        <!-- <span> -->
+          <ion-row>
+            <ion-list lines="full" class="ion-no-margin">
+              <ion-item>
+                <ion-label position="fixed" color="secondary">Name</ion-label>
+                <ion-input readonly>{{data.fname}}</ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="fixed" color="secondary">Email</ion-label>
+                <ion-input readonly>{{data.lname}}</ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="fixed" color="secondary">Password</ion-label>
+                <ion-input readonly>{{data.num}}</ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-row>
+        </span>
+    </ion-card-content>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary" routerLink="../edit-profile">
+
+    <ng-template #elseBlock>
+      <ion-row>
+        <ion-input type="file"></ion-input>
+      </ion-row>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button fill="solid" color="medium" size="small" (click)="data.isEdit = false">
+                  Cancel
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button fill="solid" color="success" size="small" (click)="updateRecord(data)">
+                  Update
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>First Name</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="data.EditFname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Last Name</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="data.EditLname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Phone Number</strong></ion-label>
+          <ion-input type="number" [(ngModel)]="data.EditNum"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ng-template>
+
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+    <ion-fab-button color="tertiary" (click)="editRecord(data)" [disabled]="data.isEdit">
       <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
