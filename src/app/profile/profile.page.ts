@@ -6,16 +6,12 @@ import { finalize, tap } from 'rxjs/operators';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
-export interface MyData {
-  name: string;
-  filepath: string;
-  size: number;
-}
 
 export interface UserData {
   fname: string;
   lname: string;
   num: number;
+  filePath: string;
   user: any;
 }
 
@@ -24,27 +20,24 @@ export interface UserData {
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
+
 export class ProfilePage implements OnInit {
 
   profList: any;
   uid: string;
+  backupProfList = [];
   isUser: boolean;
   userData: UserData;
+  fileUrl: any;
 
   // Upload Task
   task: AngularFireUploadTask;
-
-  // Progress in percentage
-  percentage: Observable<number>;
 
   // Snapshot of uploading file
   snapshot: Observable<any>;
 
   // Uploaded File URL
   uploadedFileURL: any;
-
-  //Uploaded Image List
-  images: Observable<MyData[]>;
 
   //File details
   fileName: string;
@@ -53,8 +46,6 @@ export class ProfilePage implements OnInit {
   //Status check
   isUploading: boolean;
   isUploaded: boolean;
-
-  private imageCollection: AngularFirestoreCollection<MyData>;
 
   constructor(
     private fbAuthService: AuthenticationService,
@@ -68,24 +59,9 @@ export class ProfilePage implements OnInit {
 
     this.isUploading = false;
     this.isUploaded = false;
-    //Set collection where our documents/ images info will save
-    this.imageCollection = database.collection<MyData>('freakyImages');
-    this.images = this.imageCollection.valueChanges();
   }
 
   ngOnInit() {
-    // this.firebaseService.get_transactions().subscribe((res) => {
-    //   this.userDetails = res.map(e => ({
-    //       id: e.payload.doc.id,
-    //       email: e.payload.doc.data()['email'],
-    //       fname: e.payload.doc.data()['fname'],
-    //       lname: e.payload.doc.data()['lname'],
-    //       num: e.payload.doc.data()['num'],
-    //   }));
-    //   console.log(this.userDetails);
-    // }, (err: any) => {
-    //   console.log(err);
-    // });
 
     this.firebaseService.get_transactions().subscribe(data => {
 
@@ -95,17 +71,28 @@ export class ProfilePage implements OnInit {
           fname: e.payload.doc.data()['fname'],
           lname: e.payload.doc.data()['lname'],
           num: e.payload.doc.data()['num'],
+          filePath: e.payload.doc.data()['filePath'],
           user: e.payload.doc.data()['user']
       }));
+
       console.log(this.profList);
-      console.log('reading works - prof page');
 
       // User Checking
       if(this.profList[0]['user'] === this.uid) {
-        console.log('User Check');
         this.isUser = true;
       }
 
+      this.backupProfList = [];
+
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for(let i = 0; i < this.profList.length; i++) {
+        if(this.profList[i]['user'] === this.uid) {
+          this.backupProfList.push(this.profList[i]);
+        }
+      }
+
+      localStorage.setItem('url', this.backupProfList[0]['filePath']);
+      this.fileUrl = localStorage.getItem('url');
 
     }, (err: any) => {
       console.log(err);
@@ -113,8 +100,7 @@ export class ProfilePage implements OnInit {
   }
 
 
-
-  uploadFile(event: FileList) {
+  async uploadFile(event: FileList) {
     console.log('Upload method entering');
 
     // The File object
@@ -129,62 +115,51 @@ export class ProfilePage implements OnInit {
     this.isUploading = true;
     this.isUploaded = false;
 
-
     this.fileName = file.name;
 
     // The storage path
-    const path = `freakyStorage/${new Date().getTime()}_${file.name}`;
-
-    // Totally optional metadata
-    const customMetadata = { app: 'Freaky Image Upload Demo' };
+    const path = `uploads/${new Date().getTime()}_${file.name}`;
 
     //File reference
     const fileRef = this.storage.ref(path);
 
     // The main task
-    this.task = this.storage.upload(path, file, { customMetadata });
+    this.task = this.storage.upload(path, file);
 
-    // Get file progress percentage
-    this.percentage = this.task.percentageChanges();
-
-    console.log('snap before');
-
-    this.task.snapshotChanges().pipe(
+    this.snapshot = this.task.snapshotChanges().pipe(
 
       finalize(() => {
         // Get uploaded file storage path
         this.uploadedFileURL = fileRef.getDownloadURL().subscribe(res=>{
-          console.log('Method ENTER');
-          this.addImagetoDB({
-            name: file.name,
-            filepath: res,
-            size: this.fileSize
-          });
+          let data = {
+            id: this.backupProfList['id'],
+            EditFname: this.backupProfList['fname'],
+            EditLname: this.backupProfList['lname'],
+            EditNum: this.backupProfList['num']
+          };
+          localStorage.setItem('url', res);
+          this.fileUrl = localStorage.getItem('url');
+
           this.isUploading = false;
           this.isUploaded = true;
-        }, error=>{
-          console.error(error);
+          this.updateRecord(data);
+
         });
+
       }),
       tap(snap => {
           this.fileSize = snap.totalBytes;
       })
     );
-    console.log('snapshot: ', this.snapshot);
+
+    this.snapshot.subscribe(
+      res => {
+        console.log('no error');
+      }, err => {
+        console.log('error');
+      }
+    );
   }
-
-  addImagetoDB(image: MyData) {
-    //Create an ID for document
-    const id = this.database.createId();
-
-    //Set document id with value in database
-    this.imageCollection.doc(id).set(image).then(resp => {
-      console.log(resp);
-    }).catch(error => {
-      console.log('error ' + error);
-    });
-  }
-
 
 
   logoutAction() {
@@ -201,6 +176,7 @@ export class ProfilePage implements OnInit {
     record.EditFname = record.fname;
     record.EditLname = record.lname;
     record.EditNum = record.num;
+    // record.EditPath = record.filePath;
     console.log('Edit mode on');
   }
 
@@ -209,6 +185,7 @@ export class ProfilePage implements OnInit {
     record['fname'] = recordRow.EditFname;
     record['lname'] = recordRow.EditLname;
     record['num'] = recordRow.EditNum;
+    record['filePath'] = this.fileUrl;
     record['user'] = localStorage.getItem('uid');
     this.firebaseService.update_transaction(recordRow.id, record);
     recordRow.isEdit = false;
