@@ -6,7 +6,8 @@
 
 <ion-content>
 
-  <ion-searchbar (ionInput)="filterList($event)"></ion-searchbar>
+
+  <ion-searchbar placeholder="Filter Schedules" [(ngModel)]="term" animated="true"></ion-searchbar>
 
   <!-- <ion-card>
     <ion-row>
@@ -28,8 +29,7 @@
     </ion-row>
   </ion-card> -->
 
-  <ion-card *ngFor="let item of itemList">
-    <ion-card-content>
+  <ion-card *ngFor="let item of itemList | filter: term" >
       <ion-row>
         <ion-col>
           <ion-card-header>
@@ -44,7 +44,6 @@
           </ion-card-content>
         </ion-col>
       </ion-row>
-    </ion-card-content>
   </ion-card>
 
 </ion-content>

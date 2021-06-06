@@ -10,10 +10,10 @@ import { FirebaseItemService } from '../services/firebase-item.service';
 })
 export class HomePage implements OnInit {
 
+  term: string;
   itemList = [];
-  public backupList: any[];
 
-  constructor( private firebaseService: FirebaseItemService, private firestore: AngularFirestore ) { }
+  constructor( private firebaseService: FirebaseItemService ) { }
 
   ngOnInit() {
     this.firebaseService.get_transactions().subscribe(data => {
@@ -34,31 +34,6 @@ export class HomePage implements OnInit {
 
     }, (err: any) => {
       console.log(err);
-    });
-
-    // this.itemList = await this.initializeItems();
-  }
-
-  async initializeItems(): Promise<any> {
-    const foodList = await this.firestore.collection('foodList')
-      .valueChanges().pipe(first()).toPromise();
-    this.backupList = foodList;
-    return foodList;
-  }
-
-  async filterList(evt) {
-    this.itemList = await this.initializeItems();
-    const searchTerm = evt.srcElement.value;
-
-    if (!searchTerm) {
-      return;
-    }
-
-    this.itemList = this.itemList.filter(currentFood => {
-      if (currentFood.name && searchTerm) {
-        // eslint-disable-next-line max-len
-        return (currentFood.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1 || currentFood.type.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1);
-      }
     });
   }
 
