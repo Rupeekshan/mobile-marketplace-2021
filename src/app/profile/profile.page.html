@@ -1,13 +1,45 @@
 <ion-header>
   <ion-toolbar color="secondary">
+
+    <!-- GO BACK BUTTON
+    <ion-buttons slot="start">
+      <ion-button color="light">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
     <ion-title>Profile</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button color="light">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
     <ion-button slot="end" color="tertiary" (click)="logoutAction()">Log out</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content  *ngFor="let data of profList">
-  <ion-card>
+<!-- <ion-content *ngFor="let data of userDetails">
+  <ion-row>
+    <img src="../../assets/icon/favicon.png" class="img-center" />
+  </ion-row>
 
+  <ion-list lines="full" class="ion-no-margin">
+    <ion-item>
+      <ion-label position="fixed" color="secondary">Name</ion-label>
+      <ion-input readonly>{{data.fname}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed" color="secondary">Email</ion-label>
+      <ion-input readonly>{{data.lname}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed" color="secondary">Password</ion-label>
+      <ion-input readonly>{{data.num}}</ion-input>
+    </ion-item>
+  </ion-list> -->
+
+
+<ion-content *ngFor="let data of profList">
+  <ion-card *ngIf="isUser">
     <ion-card-content>
         <ion-row>
           <img src="../../assets/icon/favicon.png" class="img-center" />
@@ -17,19 +49,31 @@
           <ion-row>
             <ion-list lines="full" class="ion-no-margin">
               <ion-item>
-                <ion-label position="fixed" color="secondary">Name</ion-label>
+                <ion-label position="fixed" color="secondary">First Name</ion-label>
                 <ion-input readonly>{{data.fname}}</ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="fixed" color="secondary">Email</ion-label>
+                <ion-label position="fixed" color="secondary">Last Name</ion-label>
                 <ion-input readonly>{{data.lname}}</ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="fixed" color="secondary">Password</ion-label>
+                <ion-label position="fixed" color="secondary">Phone Number</ion-label>
                 <ion-input readonly>{{data.num}}</ion-input>
               </ion-item>
             </ion-list>
           </ion-row>
+          <!-- <ion-row>
+            <ion-col size="2">
+              <ion-button color="primary" shape="round" (click)="editRecord(data)">
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button color="danger" shape="round" (click)="removeRecord(item.id)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row> -->
         </span>
     </ion-card-content>
 
@@ -71,6 +115,44 @@
         </ion-item>
       </ion-card-content>
     </ng-template>
+
+    <!-- <ion-card-content >
+      <ion-button color="primary" shape="round" (click)="editRecord(data)" [disabled]="data.isEdit">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content> -->
+
+    <ion-button color="success">
+      <input id="uploadBtn" type="file" (change)="uploadFile($event.target.files)" />
+    </ion-button>
+
+    <ion-card class="ion-text-center" *ngIf="!isUploading && isUploaded">
+      <ion-card-header>
+        <ion-card-title>
+          <b>{{ fileName }}</b> Uploaded!
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div *ngIf="uploadedFileURL | async as url">
+          <img [src]="url" />
+          <!-- <a [href]="url" target="_blank" rel="noopener">Download</a> -->
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card color="light" class="ion-text-center" *ngFor="let item of images | async">
+      <ion-card-header>
+        <ion-card-title>
+          {{ item.name }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <img [src]="item.filepath" />
+        <!-- <a [href]="item.filepath" target="_blank" rel="noopener">Download</a> -->
+      </ion-card-content>
+    </ion-card>
 
   </ion-card>
 

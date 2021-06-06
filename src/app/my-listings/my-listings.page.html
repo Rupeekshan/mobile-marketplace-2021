@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of userList">
+  <ion-card *ngFor="let item of backupItemList">
     <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-content>
         <ion-row>

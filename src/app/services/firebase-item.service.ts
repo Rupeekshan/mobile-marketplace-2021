@@ -32,5 +32,6 @@ export class FirebaseItemService {
   get_single_transaction(id) {
     return this.firestore.collection(this.collectionName).doc(id).valueChanges();
   }
+
 }
 

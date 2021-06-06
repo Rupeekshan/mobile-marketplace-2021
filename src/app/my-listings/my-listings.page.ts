@@ -11,28 +11,49 @@ import { FirebaseItemService } from '../services/firebase-item.service';
 })
 export class MyListingsPage implements OnInit {
 
-  userList = [];
+  itemList = [];
+  backupItemList = [];
+  uid: string;
+  isUser: boolean;
 
   constructor(
     private firebaseService: FirebaseItemService,
-    public fb: FormBuilder
-  ) { }
+    public fb: FormBuilder,
+  ) {
+    this.uid = localStorage.getItem('uid');
+    this.isUser = false;
+   }
 
   ngOnInit() {
     this.firebaseService.get_transactions().subscribe(data => {
 
-      this.userList = data.map(e => ({
+      this.itemList = data.map(e => ({
           id: e.payload.doc.id,
           isEdit: false,
           Name: e.payload.doc.data()['Name'],
           Outlet: e.payload.doc.data()['Outlet'],
           Price: e.payload.doc.data()['Price'],
+          User: e.payload.doc.data()['User']
       }));
-      if(this.userList.length === 0) {
-        console.log('empty list');
+
+      this.backupItemList = [];
+
+      // eslint-disable-next-line @typescript-eslint/prefer-for-of
+      for(let i = 0; i < this.itemList.length; i++) {
+        if(this.itemList[i]['User'] === this.uid) {
+          this.backupItemList.push(this.itemList[i]);
+        }
       }
-      console.log(this.userList);
-      console.log('reading works - page');
+
+      if(this.backupItemList.length === 0) {
+        console.log('empty listing');
+      }
+
+      console.log(this.backupItemList);
+
+      // console.log(this.itemList);
+      // console.log(localStorage.getItem('uid'));
+      console.log('reading works - listing page');
 
     }, (err: any) => {
       console.log(err);
@@ -57,6 +78,7 @@ export class MyListingsPage implements OnInit {
     record['Name'] = recordRow.EditName;
     record['Outlet'] = recordRow.EditOutlet;
     record['Price'] = recordRow.EditPrice;
+    record['User'] = localStorage.getItem('uid');
     this.firebaseService.update_transaction(recordRow.id, record);
     recordRow.isEdit = false;
     console.log('Item Updated');

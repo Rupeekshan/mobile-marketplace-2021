@@ -4,6 +4,7 @@ import { IonSlides, ActionSheetController, NavController } from '@ionic/angular'
 import { Location } from '@angular/common';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,7 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     public authService: AuthenticationService,
     private formBuilder: FormBuilder,
-
+    private profile: ProfilePage
   ) {
 
     this.hideResend = false;
@@ -91,6 +92,13 @@ export class RegisterPage implements OnInit {
           this.hasVerifiedEmail = this.currentUser.emailVerified;
           if (this.hasVerifiedEmail) {
             //this.authService.setEmailVerified(this.hasVerifiedEmail, this.currentUser.uid, this.currentUser);
+            const data = {
+              fname: '',
+              lname: '',
+              num: '',
+              user: ''
+            };
+            this.profile.addRecord(data);
             this.stopInterval = true;
             clearInterval(this.interval);
             this.navCtrl.navigateRoot(['']);

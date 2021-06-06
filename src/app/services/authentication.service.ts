@@ -15,6 +15,7 @@ export class AuthenticationService {
       if(user){
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
+        localStorage.setItem('uid', JSON.stringify(this.userData.uid));
       }
       else{
         localStorage.setItem('user', null);
@@ -38,6 +39,7 @@ export class AuthenticationService {
     // HOW to clear the form
     localStorage.setItem('user', null);
     localStorage.removeItem('user');
+    localStorage.removeItem('uid');
     this.router.navigate(['login']);
     return this.ngFireAuth.signOut();
   }
