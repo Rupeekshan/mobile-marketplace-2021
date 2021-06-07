@@ -1,6 +1,17 @@
-<ion-header>
-  <ion-toolbar color="danger">
-    <ion-title>Food Details </ion-title>
+<ion-header class="title">
+  <ion-toolbar class="theme" color= "var">
+    <ion-row>
+      <ion-col >
+
+        <ion-title>
+          <ion-icon name="restaurant"></ion-icon>
+          <span> Food items</span>
+        </ion-title>
+        
+      </ion-col>
+    </ion-row>
+    
+    
   </ion-toolbar>
 </ion-header>
 
@@ -8,15 +19,15 @@
 
   <ion-searchbar placeholder="Find your favourites" [(ngModel)]="term" animated="true"></ion-searchbar>
 
-  <ion-card *ngFor="let item of itemList | filter: term" >
+  <ion-card *ngFor="let item of itemList | filter: term" > 
       <ion-row>
         <ion-col>
           <ion-card-header>
             <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
-            <ion-card-title>{{item.Name}}</ion-card-title>
+            <ion-card-title class="Des">{{item.Name}}</ion-card-title>
           </ion-card-header>
         </ion-col>
-        <ion-col size=3 id="price">
+        <ion-col size=3>
           <ion-card-content>
             <ion-badge color="danger">
               <small>Rs. </small>

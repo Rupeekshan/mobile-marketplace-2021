@@ -1,6 +1,15 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title>My Listings</ion-title>
+  <ion-toolbar class="theme" color= "var">
+    <ion-row>
+      <ion-col>
+        <ion-title>
+          <ion-icon  name="clipboard"></ion-icon> 
+          <span> My Listings</span>
+        </ion-title>
+      </ion-col>
+    </ion-row>
+    
+    
   </ion-toolbar>
 </ion-header>
 
@@ -12,17 +21,19 @@
           <ion-col>
             <ion-card-header>
               <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
-              <ion-card-title>{{item.Name}}</ion-card-title>
+              <ion-card-title>{{item.Name}}</ion-card-title>              
             </ion-card-header>
             <ion-card-content>
-              <ion-badge color="danger">
-                <small>Rs. </small>
-                {{item.Price}}
+              <ion-badge size="2" class="theme">  
+                <h2>
+                  <small>Rs. </small>
+                  {{item.Price}}
+                </h2>
               </ion-badge>
             </ion-card-content>
           </ion-col>
           <ion-col size="2">
-            <ion-button color="primary" shape="round" (click)="editRecord(item)">
+            <ion-button  shape="round" (click)="editRecord(item)">
               <ion-icon name="pencil-outline"></ion-icon>
             </ion-button>
           </ion-col>
@@ -37,6 +48,7 @@
 
 
     <ng-template #elseBlock>
+    
       <ion-card-header>
         <ion-card-title>
           <ion-grid>
@@ -75,10 +87,8 @@
     </ng-template>
   </ion-card>
 
-
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary" routerLink="../my-listings-add">
+  <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="button-color" routerLink="../my-listings-add">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
