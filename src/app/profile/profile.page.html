@@ -1,6 +1,9 @@
-<ion-header>
-  <ion-toolbar color ="danger">  
-    <ion-title><ion-icon name="person-sharp" size="medium"></ion-icon>Profile</ion-title>
+<ion-header class="title">
+  <ion-toolbar class="theme" color= "var">
+    <ion-title>
+      <ion-icon name="person-sharp" ></ion-icon>
+      <span>Profile</span>
+    </ion-title>
     <ion-button slot="end" color="warning" (click)="logoutAction()">Log out</ion-button>
   </ion-toolbar>
 </ion-header>
@@ -16,15 +19,15 @@
         <ion-row>
           <ion-list lines="full" class="ion-no-margin">
             <ion-item>
-              <ion-label position="fixed" color="medium">First<br>Name</ion-label>
+              <ion-label position="fixed" class="chng-clr ion-padding-start">First<br>Name</ion-label>
               <ion-input readonly>{{data.fname}}</ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="fixed" color="medium">Last<br>Name</ion-label>
+              <ion-label position="fixed" class="chng-clr ion-padding-start">Last<br>Name</ion-label>
               <ion-input readonly>{{data.lname}}</ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="fixed" color="medium">Phone<br>Number</ion-label>
+              <ion-label position="fixed" class="chng-clr ion-padding-start">Phone<br>Number</ion-label>
               <ion-input readonly>{{data.num}}</ion-input>
             </ion-item>
           </ion-list>
@@ -88,11 +91,11 @@
       </ion-card-content>
 
     </ng-template>
-    
+
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
-    <ion-fab-button color="danger" (click)="editRecord(data)" [disabled]="data.isEdit">
+    <ion-fab-button class="button-color" (click)="editRecord(data)" [disabled]="data.isEdit">
       <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

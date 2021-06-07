@@ -1,30 +1,30 @@
-<ion-header>
+<ion-header class="title">
   <ion-toolbar class="theme" color= "var">
     <ion-row>
       <ion-col>
         <ion-title>
-          <ion-icon  name="clipboard"></ion-icon> 
+          <ion-icon  name="clipboard"></ion-icon>
           <span> My Listings</span>
         </ion-title>
       </ion-col>
     </ion-row>
-    
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="bg-img"> </div>
   <ion-card *ngFor="let item of backupItemList">
     <span *ngIf="!item.isEdit; else elseBlock">
-      <ion-card-content>
-        <ion-row>
+      <!-- <ion-card-content class="ion-no-padding"> -->
+      <ion-card-content >
+        <!-- <ion-row>
           <ion-col>
             <ion-card-header>
-              <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
-              <ion-card-title>{{item.Name}}</ion-card-title>              
+              <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
+              <ion-card-title class="Des">{{item.Name}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-badge size="2" class="theme">  
+              <ion-badge size="2" class="theme">
                 <h2>
                   <small>Rs. </small>
                   {{item.Price}}
@@ -33,13 +33,41 @@
             </ion-card-content>
           </ion-col>
           <ion-col size="2">
-            <ion-button  shape="round" (click)="editRecord(item)">
+            <ion-button  shape="round" size="small" (click)="editRecord(item)">
               <ion-icon name="pencil-outline"></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="2">
-            <ion-button color="danger" shape="round" (click)="removeRecord(item.id)">
+            <ion-button color="danger" shape="round" size="small" (click)="removeRecord(item.id)">
               <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row> -->
+        <ion-row class="ion-align-items-center">
+          <ion-col align-items-center>
+            <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
+          </ion-col>
+          <ion-col size="3">
+            <ion-badge class="theme">
+              <h2>
+                <small>Rs. </small>
+                {{item.Price}}
+              </h2>
+            </ion-badge>
+          </ion-col>
+        </ion-row>
+        <ion-row  class="ion-align-items-center">
+          <ion-col>
+            <ion-card-title class="Des">{{item.Name}}</ion-card-title>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button  shape="round" size="small" (click)="editRecord(item)">
+              <ion-icon name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button color="danger" shape="round" size="small" (click)="removeRecord(item.id)">
+              <ion-icon name="trash" (click)="removeRecord(item.id)"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
@@ -48,7 +76,7 @@
 
 
     <ng-template #elseBlock>
-    
+
       <ion-card-header>
         <ion-card-title>
           <ion-grid>

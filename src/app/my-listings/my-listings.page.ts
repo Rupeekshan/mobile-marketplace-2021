@@ -53,7 +53,7 @@ export class MyListingsPage implements OnInit {
 
       // console.log(this.itemList);
       // console.log(localStorage.getItem('uid'));
-      console.log('reading works - listing page');
+      // console.log('reading works - listing page');
 
     }, (err: any) => {
       console.log(err);
