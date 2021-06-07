@@ -1,28 +1,47 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title>My Listings</ion-title>
+  <ion-toolbar class="theme" color= "var">
+    <ion-row>
+      <ion-col >
+
+        <ion-title><ion-icon  name="clipboard"></ion-icon> 
+          <span> My Listings</span></ion-title>
+        
+      </ion-col>
+    </ion-row>
+    
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of backupItemList">
-    <span *ngIf="!item.isEdit; else elseBlock">
+  <!-- <ion-card *ngFor="let item of backupItemList"> -->
+  <ion-card >
+    <!-- <span *ngIf="!item.isEdit; else elseBlock"> -->
+    <span>
       <ion-card-content>
         <ion-row>
           <ion-col>
             <ion-card-header>
-              <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
-              <ion-card-title>{{item.Name}}</ion-card-title>
+              <!-- <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
+              <ion-card-title>{{item.Name}}</ion-card-title> -->
+
+              <ion-card-subtitle>datas</ion-card-subtitle>
+              <ion-card-title>Item</ion-card-title>
+              
             </ion-card-header>
             <ion-card-content>
-              <ion-badge color="danger">
-                <small>Rs. </small>
-                {{item.Price}}
+              <ion-badge size="2" class="theme">
+                
+                <!-- {{item.Price}} -->
+                <h2>
+                  <small>Rs. </small>
+                  400
+                </h2>
               </ion-badge>
             </ion-card-content>
           </ion-col>
           <ion-col size="2">
-            <ion-button color="primary" shape="round" (click)="editRecord(item)">
+            <ion-button  shape="round" (click)="editRecord(item)">
               <ion-icon name="pencil-outline"></ion-icon>
             </ion-button>
           </ion-col>
@@ -36,7 +55,9 @@
     </span>
 
 
-    <ng-template #elseBlock>
+    <!-- <ng-template #elseBlock> -->
+    <ion-card-content>
+    
       <ion-card-header>
         <ion-card-title>
           <ion-grid>
@@ -45,12 +66,14 @@
                 Edit
               </ion-col>
               <ion-col>
-                <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
+                <!-- <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false"> -->
+                <ion-button fill="solid" color="medium" size="small">
                   Cancel
                 </ion-button>
               </ion-col>
               <ion-col>
-                <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)">
+                <!-- <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)"> -->
+                <ion-button fill="solid" color="success" size="small">
                   Update
                 </ion-button>
               </ion-col>
@@ -61,24 +84,28 @@
       <ion-card-content>
         <ion-item>
           <ion-label><strong>Item Name</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
+          <!-- <ion-input type="text" [(ngModel)]="item.EditName"></ion-input> -->
+          <ion-input type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label><strong>Outlet Name</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
+          <!-- <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input> -->
+          <ion-input type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label><strong>Price</strong></ion-label>
-          <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
+          <!-- <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input> -->
+          <ion-input type="number"></ion-input>
         </ion-item>
       </ion-card-content>
-    </ng-template>
+    </ion-card-content>
   </ion-card>
 
 
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary" routerLink="../my-listings-add">
+  <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
+    <!-- <ion-fab-button color="tertiary" routerLink="../my-listings-add"> -->
+    <ion-fab-button class="button-color" >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
