@@ -1,7 +1,43 @@
 .img-center {
   display: block;
   margin: 10px auto;
-  width: 50%;
+  width: 60%;
+  height: 60%;
   border-radius: 50%;
   box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+}
+
+.img-card {
+  min-height: 140px;
+  width: 100%;
+}
+
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 30px;
+  border-radius: 25px;
+  // background: linear-gradient(40deg, #da4b46, #e6e6ee);
+  background: #da4b46;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .2s ease-out;
+}
+
+.file-input {
+  margin: auto;
 }

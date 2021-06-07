@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, ActionSheetController, NavController } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ProfilePage } from '../profile/profile.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
+
 export class RegisterPage implements OnInit {
   // slide declaration
   @ViewChild(IonSlides, {static:false}) slides: IonSlides;
@@ -33,21 +33,22 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     public authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private profile: ProfilePage
+    public router: Router
   ) {
+
 
     this.hideResend = false;
 
     this.authService.getUser().subscribe(result => {
       this.currentUser = result;
       if(result){
-        this.email = result.email;
-        if (result && result.email && !result.emailVerified) {
-          console.log('email not verified');
-          this.slides.slideTo(1, 500);
-          // slides to Email Verification slide
-        }
+      this.email = result.email;
+      if (result && result.email && !result.emailVerified) {
+        console.log('email not verified');
+        this.slides.slideTo(1, 500);
+        // slides to Email Verification slide
       }
+    }
     });
 
   }
@@ -85,32 +86,27 @@ export class RegisterPage implements OnInit {
 
       this.authService.getUser().subscribe(result => {
         this.currentUser = result;
-        if (this.currentUser) {
-          this.email = this.currentUser.email;
-          this.currentUser.reload();
-          console.log('email', this.currentUser.emailVerified);
-          this.hasVerifiedEmail = this.currentUser.emailVerified;
-          if (this.hasVerifiedEmail) {
-            //this.authService.setEmailVerified(this.hasVerifiedEmail, this.currentUser.uid, this.currentUser);
-            const data = {
-              fname: '',
-              lname: '',
-              num: '',
-              user: ''
-            };
-            this.profile.addRecord(data);
-            this.stopInterval = true;
-            clearInterval(this.interval);
-            this.navCtrl.navigateRoot(['']);
-          }
+      if (this.currentUser) {
+        this.email = this.currentUser.email;
+        this.currentUser.reload();
+        console.log('email', this.currentUser.emailVerified);
+        this.hasVerifiedEmail = this.currentUser.emailVerified;
+        if (this.hasVerifiedEmail) {
+          //this.authService.setEmailVerified(this.hasVerifiedEmail, this.currentUser.uid, this.currentUser);
+          this.stopInterval = true;
+          clearInterval(this.interval);
+          this.navCtrl.navigateRoot(['']);
         }
-      });
+      }
+    });
 
-    }, 5000);
 
-    if (this.stopInterval) {
-      clearInterval(this.interval);
-    }
+
+
+  }, 5000);
+  if (this.stopInterval) {
+    clearInterval(this.interval);
+  }
 
   }
 
@@ -131,6 +127,10 @@ export class RegisterPage implements OnInit {
 
   goNext(){
     this.slides.slideNext(500).then(d=>console.log(d));
+  }
+
+  back() {
+    this.router.navigate(['login']);
   }
 
 }

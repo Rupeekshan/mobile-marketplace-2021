@@ -8,7 +8,7 @@
 
   <ion-searchbar placeholder="Find your favourites" [(ngModel)]="term" animated="true"></ion-searchbar>
 
-  <ion-card *ngFor="let item of itemList | filter: term" > 
+  <ion-card *ngFor="let item of itemList | filter: term" >
       <ion-row>
         <ion-col>
           <ion-card-header>
