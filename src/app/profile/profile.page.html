@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title>Profile</ion-title>
-    <ion-button slot="end" color="tertiary" (click)="logoutAction()">Log out</ion-button>
+  <ion-toolbar color="danger">  
+    <ion-title><ion-icon name="person-sharp" size="medium"></ion-icon>Profile</ion-title>
+    <ion-button slot="end" color="warning" (click)="logoutAction()">Log out</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -89,7 +89,7 @@
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
-    <ion-fab-button color="tertiary" (click)="editRecord(data)" [disabled]="data.isEdit">
+    <ion-fab-button color="danger" (click)="editRecord(data)" [disabled]="data.isEdit">
       <ion-icon name="create-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
