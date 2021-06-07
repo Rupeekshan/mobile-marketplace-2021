@@ -1,31 +1,69 @@
-<ion-header>
-  <ion-toolbar color="danger">
-    <ion-title>Food Details </ion-title>
+<ion-header class="title">
+  <ion-toolbar class="theme" color= "var">
+    <ion-row>
+      <ion-col >
+
+        <ion-title><ion-icon name="restaurant"></ion-icon>
+          <span> Food items</span></ion-title>
+        
+      </ion-col>
+    </ion-row>
+    
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-searchbar placeholder="Find your favourites" [(ngModel)]="term" animated="true"></ion-searchbar>
 
-  <ion-card *ngFor="let item of itemList | filter: term" >
+  <!-- <ion-searchbar placeholder="Filter Schedules" [(ngModel)]="term" animated="true"></ion-searchbar> -->
+  <ion-searchbar > </ion-searchbar>
+
+  <!-- <ion-card>
+    <ion-row>
+      <ion-col size="5">
+        <img src="../../assets/icon/favicon.png" />
+      </ion-col>
+      <ion-col>
+        <ion-card-header>
+          <ion-card-subtitle>Season54</ion-card-subtitle>
+          <ion-card-title>Chicken Kothu</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-badge color="danger">
+            <small>Rs. </small>
+            980.00
+          </ion-badge>
+        </ion-card-content>
+      </ion-col>
+    </ion-row>
+  </ion-card> -->
+
+  <!-- <ion-card *ngFor="let item of itemList | filter: term" > --> 
+    <ion-card >
       <ion-row>
         <ion-col>
           <ion-card-header>
-            <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
-            <ion-card-title>{{item.Name}}</ion-card-title>
+            <!-- <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
+            <ion-card-title>{{item.Name}}</ion-card-title> -->
+
+            <ion-card-subtitle class="shop">FRM Stores</ion-card-subtitle>
+            <ion-card-title class="Des">Chicken Kottu</ion-card-title>
+
           </ion-card-header>
         </ion-col>
-        <ion-col size=3 id="price">
+        <ion-col size=3>
           <ion-card-content>
             <ion-badge color="danger">
               <small>Rs. </small>
-              <h1>{{item.Price}}</h1>
+              <!-- {{item.Price}} -->
+              <h1>450</h1>
             </ion-badge>
           </ion-card-content>
         </ion-col>
       </ion-row>
   </ion-card>
+
 
 </ion-content>
 
