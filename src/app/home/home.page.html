@@ -1,27 +1,26 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title>Home</ion-title>
+  <ion-toolbar color="danger">
+    <ion-title>Food Details </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-
   <ion-searchbar placeholder="Find your favourites" [(ngModel)]="term" animated="true"></ion-searchbar>
-
-
 
   <ion-card *ngFor="let item of itemList | filter: term" >
       <ion-row>
         <ion-col>
           <ion-card-header>
-            <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
+            <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
             <ion-card-title>{{item.Name}}</ion-card-title>
           </ion-card-header>
+        </ion-col>
+        <ion-col size=3 id="price">
           <ion-card-content>
             <ion-badge color="danger">
               <small>Rs. </small>
-              {{item.Price}}
+              <h1>{{item.Price}}</h1>
             </ion-badge>
           </ion-card-content>
         </ion-col>
