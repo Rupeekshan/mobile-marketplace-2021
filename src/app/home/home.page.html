@@ -6,7 +6,7 @@
 
 <ion-content>
 
-  <ion-searchbar placeholder="Filter Schedules" [(ngModel)]="term" animated="true"></ion-searchbar>
+  <ion-searchbar placeholder="Find your favourites" [(ngModel)]="term" animated="true"></ion-searchbar>
 
   <ion-card *ngFor="let item of itemList | filter: term" > 
       <ion-row>
