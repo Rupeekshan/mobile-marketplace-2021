@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar class="theme" color= "var">
     <ion-row>
-      <ion-col >
-
-        <ion-title><ion-icon  name="clipboard"></ion-icon> 
-          <span> My Listings</span></ion-title>
-        
+      <ion-col>
+        <ion-title>
+          <ion-icon  name="clipboard"></ion-icon> 
+          <span> My Listings</span>
+        </ion-title>
       </ion-col>
     </ion-row>
     
@@ -14,28 +14,20 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card *ngFor="let item of backupItemList"> -->
-  <ion-card >
-    <!-- <span *ngIf="!item.isEdit; else elseBlock"> -->
-    <span>
+  <ion-card *ngFor="let item of backupItemList">
+    <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-content>
         <ion-row>
           <ion-col>
             <ion-card-header>
-              <!-- <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
-              <ion-card-title>{{item.Name}}</ion-card-title> -->
-
-              <ion-card-subtitle>datas</ion-card-subtitle>
-              <ion-card-title>Item</ion-card-title>
-              
+              <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
+              <ion-card-title>{{item.Name}}</ion-card-title>              
             </ion-card-header>
             <ion-card-content>
-              <ion-badge size="2" class="theme">
-                
-                <!-- {{item.Price}} -->
+              <ion-badge size="2" class="theme">  
                 <h2>
                   <small>Rs. </small>
-                  400
+                  {{item.Price}}
                 </h2>
               </ion-badge>
             </ion-card-content>
@@ -55,8 +47,7 @@
     </span>
 
 
-    <!-- <ng-template #elseBlock> -->
-    <ion-card-content>
+    <ng-template #elseBlock>
     
       <ion-card-header>
         <ion-card-title>
@@ -66,14 +57,12 @@
                 Edit
               </ion-col>
               <ion-col>
-                <!-- <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false"> -->
-                <ion-button fill="solid" color="medium" size="small">
+                <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
                   Cancel
                 </ion-button>
               </ion-col>
               <ion-col>
-                <!-- <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)"> -->
-                <ion-button fill="solid" color="success" size="small">
+                <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)">
                   Update
                 </ion-button>
               </ion-col>
@@ -84,18 +73,15 @@
       <ion-card-content>
         <ion-item>
           <ion-label><strong>Item Name</strong></ion-label>
-          <!-- <ion-input type="text" [(ngModel)]="item.EditName"></ion-input> -->
-          <ion-input type="text"></ion-input>
+          <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label><strong>Outlet Name</strong></ion-label>
-          <!-- <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input> -->
-          <ion-input type="text"></ion-input>
+          <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label><strong>Price</strong></ion-label>
-          <!-- <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input> -->
-          <ion-input type="number"></ion-input>
+          <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
         </ion-item>
       </ion-card-content>
     </ion-card-content>
@@ -104,8 +90,7 @@
 
 
   <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
-    <!-- <ion-fab-button color="tertiary" routerLink="../my-listings-add"> -->
-    <ion-fab-button class="button-color" >
+    <ion-fab-button class="button-color" routerLink="../my-listings-add">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
