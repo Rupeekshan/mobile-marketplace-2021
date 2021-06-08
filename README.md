@@ -11,6 +11,7 @@ This project emphasizes the demo interactive platform of food delivery applicati
 
 ## Features
 * View available food items
+* Search items
 * Add new items
 * Update new items
 * Delete items
