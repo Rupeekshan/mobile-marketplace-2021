@@ -2,21 +2,25 @@
   <ion-toolbar class="theme" color= "var">
     <ion-title>
       <ion-icon name="person-sharp" ></ion-icon>
-      <!-- <span><small>Hi, </small><b>{{uname}}</b></span> -->
       <span><small>Hi, </small><b>{{uname}}</b></span>
     </ion-title>
-    <ion-button slot="end" color="warning" (click)="logoutAction()">Log out</ion-button>
+    <ion-button slot="end" color="warning" (click)="logoutAction()" size="small">
+      <ion-icon name="power-outline"></ion-icon><small>Log out</small>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngFor="let data of backupProfList">
+
   <div class="bg-img"> </div>
+
   <ion-card *ngIf="isUser">
+
     <ion-card-content>
       <span *ngIf="!data.isEdit; else elseBlock">
         <ion-row class="img-card">
           <img [src]= "data.filePath" class="img-center" *ngIf="isPath"/>
-          <img src= "../../assets/icon/favicon.png" class="img-center" *ngIf="!isPath"/>
+          <img src= "../../assets/add_pro_pic.png" class="img-center" *ngIf="!isPath"/>
       </ion-row>
 
         <ion-row>
@@ -40,11 +44,12 @@
 
 
     <ng-template #elseBlock>
+
       <ion-row>
         <ion-card color="light" class="ion-text-center img-card">
           <ion-card-content>
             <img [src]= "data.filePath" class="img-center" *ngIf="!isUploaded && isPath"/>
-            <img src= "../../assets/icon/favicon.png" class="img-center" *ngIf="!isPath"/>
+            <img src= "../../assets/add_pro_pic.png" class="img-center" *ngIf="!isPath"/>
             <img [src]="fileUrl" class="img-center" *ngIf="isUploaded"/>
             <ion-progress-bar type="indeterminate" *ngIf="isUploading"></ion-progress-bar>
           </ion-card-content>
@@ -57,40 +62,34 @@
       </ion-row>
 
 
-      <ion-card-header>
+      <ion-card-header class="ion-no-padding ion-padding-top">
         <ion-card-title>
-          <ion-grid>
-            <ion-row class = "ion-align-items-start">
-              <ion-col>
-                <div id = "container">
-                  <ion-button fill="solid" color="medium" size="small" (click)="data.isEdit = false">
-                    Cancel
-                  </ion-button>
-                </div>
-              </ion-col>
-              <ion-col>
-                <div id = "container">
-                  <ion-button fill="solid" color="success" size="small" (click)="updateRecord(data)">
-                    Update
-                  </ion-button>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+          <ion-row class = "ion-align-items-start">
+            <ion-col>
+                <ion-button fill="solid" color="danger" size="small" (click)="data.isEdit = false" class="ion-float-right">
+                  Cancel
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button fill="solid" color="success" size="small" (click)="updateRecord(data)">
+                  Update
+                </ion-button>
+            </ion-col>
+          </ion-row>
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label position="fixed"><strong>First<br>Name</strong></ion-label>
+          <ion-label color="success" position="stacked">First Name</ion-label>
           <ion-input type="text" [(ngModel)]="data.EditFname"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="fixed"><strong>Last<br>Name</strong></ion-label>
+          <ion-label color="success" position="stacked">Last Name</ion-label>
           <ion-input type="text" [(ngModel)]="data.EditLname"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="fixed"><strong>Phone<br>Number</strong></ion-label>
-          <ion-input type="number" [(ngModel)]="data.EditNum"></ion-input>
+          <ion-label color="success" position="stacked">Phone Number</ion-label>
+          <ion-input type="text" [(ngModel)]="data.EditNum"></ion-input>
         </ion-item>
       </ion-card-content>
 

@@ -23,15 +23,11 @@ const routes: Routes = [
             path: 'my-listings-add',
             loadChildren: () => import('../my-listings-add/my-listings-add.module').then( m => m.MyListingsAddPageModule)
           },
-          {
-            path: 'edit-profile',
-            loadChildren: () => import('../edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
-          },
-              {
-                path: '',
-                redirectTo: '/tabs/home',
-                pathMatch: 'full'
-              }
+            {
+              path: '',
+              redirectTo: '/tabs/home',
+              pathMatch: 'full'
+            }
       ]
     },
     {

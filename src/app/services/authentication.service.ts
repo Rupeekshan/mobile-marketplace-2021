@@ -16,6 +16,8 @@ export class AuthenticationService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         localStorage.setItem('uid', JSON.stringify(this.userData.uid));
+        localStorage.setItem('uname', null);
+        localStorage.setItem('url', null);
       }
       else{
         // localStorage.setItem('user', null);
@@ -33,11 +35,10 @@ export class AuthenticationService {
 
   SignOut()
   {
-    // localStorage.setItem('user', null);
     localStorage.removeItem('user');
     localStorage.removeItem('uid');
     localStorage.removeItem('url');
-    // localStorage.removeItem('uname');
+    localStorage.removeItem('uname');
     this.router.navigate(['login']);
     return this.ngFireAuth.signOut();
   }

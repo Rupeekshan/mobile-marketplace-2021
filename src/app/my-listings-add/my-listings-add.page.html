@@ -11,27 +11,21 @@
 
 <ion-content>
 
-  <form [formGroup]="userForm" >
+  <form [formGroup]="userForm">
     <ion-card>
-        <ion-item>
-          <ion-label position="floating">Item Name</ion-label>
-          <ion-input formControlName="Name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Outlet Name</ion-label>
-          <ion-input formControlName="Outlet"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Price (Rs.)</ion-label>
-          <ion-input type="number" formControlName="Price"></ion-input>
-        </ion-item>
-      <!-- <ion-item>
-        <ion-label position="stacked">Item Photo</ion-label>
-        <ion-input type="file"></ion-input>
-      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating" color="dark">Item Name</ion-label>
+        <ion-input formControlName="Name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="dark">Outlet Name</ion-label>
+        <ion-input formControlName="Outlet"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="dark">Price (Rs.)</ion-label>
+        <ion-input type="number" formControlName="Price"></ion-input>
+      </ion-item>
     </ion-card>
-
-  <!-- <app-photo-upload></app-photo-upload> -->
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button class="button-color" (click)="addRecord()">

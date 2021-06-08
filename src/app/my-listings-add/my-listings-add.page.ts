@@ -38,7 +38,7 @@ export class MyListingsAddPage implements OnInit {
       Price: ['', [Validators.required]],
       User: localStorage.getItem('uid')
     });
-    console.log(this.userForm.value['User']);
+    // console.log(this.userForm.value['User']);
   }
 
 

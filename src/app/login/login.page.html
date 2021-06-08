@@ -25,11 +25,13 @@
         <ion-button id="theme" class="theme" color= "var" (click)="onLogin(loginForm)" type="submit" expand="block">
           Login
         </ion-button>
-        <label class="errorMessage">{{errorMessage}}</label>
+        <div class="error-message">
+          <label>{{errorMessage}}</label>
+        </div>
       </ion-col>
     </ion-row>
   </form>
-</div>
+  </div>
   <p class="createAcc" (click)="register()">Don't have an account?
     <span class="registerTag">Sign up</span>
   </p>

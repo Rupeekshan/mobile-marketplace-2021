@@ -29,8 +29,8 @@ export class LoginPage implements OnInit {
           if(results.user && results.user.emailVerified){
             // console.log(results.user);
             console.log('Logging in');
-            this.router.navigateByUrl('/tabs/home');
-            // form.reset();
+            this.router.navigate(['']);
+            return true;
           }
           else{
             this.router.navigateByUrl('/register');

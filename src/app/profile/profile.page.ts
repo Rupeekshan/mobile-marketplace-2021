@@ -65,6 +65,9 @@ export class ProfilePage implements OnInit {
     this.isUploading = false;
     this.isUploaded = false;
 
+    this.uname = localStorage.getItem('uname');
+    this.fileUrl = localStorage.getItem('url');
+
   }
 
   ngOnInit() {
@@ -81,13 +84,11 @@ export class ProfilePage implements OnInit {
           user: e.payload.doc.data()['user']
       }));
 
-      // localStorage.setItem('user', this.uid);
-
       this.backupProfList = [];
 
-      if(this.profList[this.profList.length - 1]['user'] === '') {
-        this.profList[this.profList.length - 1]['user'] = this.uid;
-      }
+      // if(this.profList[this.profList.length - 1]['user'] === '') {
+      //   this.profList[this.profList.length - 1]['user'] = this.uid;
+      // }
 
       // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for(let i = 0; i < this.profList.length; i++) {
@@ -121,18 +122,13 @@ export class ProfilePage implements OnInit {
       }
 
       localStorage.setItem('url', this.backupProfList[0]['filePath']);
-      this.fileUrl = localStorage.getItem('url');
+      // this.fileUrl = localStorage.getItem('url');
 
     }, (err: any) => {
       console.log(err);
     });
   }
 
-  // deleteFileStorage(name: string) {
-  //   const storageRef = this.storage.storage.ref();
-  //   storageRef.child(`${this.basePath}/${name}`).delete();
-  //   console.log('Old Deleted');
-  // }
 
   async uploadFile(event: FileList) {
     console.log('Uploading...');
@@ -209,7 +205,6 @@ export class ProfilePage implements OnInit {
 
   logoutAction() {
     console.log('Logging out');
-    localStorage.removeItem('uname');
     this.fbAuthService.SignOut();
   }
 
@@ -218,7 +213,6 @@ export class ProfilePage implements OnInit {
     record.EditFname = record.fname;
     record.EditLname = record.lname;
     record.EditNum = record.num;
-    // record.EditPath = record.filePath;
     console.log('Edit mode on');
   }
 
@@ -230,7 +224,6 @@ export class ProfilePage implements OnInit {
     record['filePath'] = this.fileUrl;
     record['user'] = localStorage.getItem('uid');
     this.firebaseService.update_transaction(recordRow.id, record);
-    // recordRow.isEdit = false;
     console.log('Profile Updated...');
   }
 

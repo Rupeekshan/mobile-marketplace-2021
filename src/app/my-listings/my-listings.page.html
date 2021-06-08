@@ -48,64 +48,44 @@
     </span>
 
     <ng-template #elseBlock>
-      <ion-card-header>
+      <ion-card-header  class="ion-no-padding ion-padding-top ion-padding-start">
         <ion-card-title>
-          <ion-grid>
             <ion-row>
-          
-              <ion-col >
-                <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
-<!--                 <ion-button fill="solid" color="danger" size="small"> -->
+
+              <ion-col size="4">
+                <ion-button fill="solid" color="danger" size="small" (click)="item.isEdit = false">
                   Cancel
                 </ion-button>
               </ion-col>
-              <ion-col>
+              <ion-col size="4">
                 <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)">
-<!--                 <ion-button fill="solid" color="success" size="small"> -->
                   Update
                 </ion-button>
               </ion-col>
             </ion-row>
-          </ion-grid>
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <!-- <ion-label><strong>Item Name</strong></ion-label> -->
-          <!-- <ion-input type="text" [(ngModel)]="item.EditName"></ion-input> -->
-          <ion-item>
-            <ion-label color="success" position="stacked">Item Name</ion-label>
-            <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
-          </ion-item>
-          <ion-input type="text"></ion-input>
+          <ion-label color="success" position="stacked">Item Name</ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
         </ion-item>
         <ion-item>
-          <!-- <ion-label><strong>Outlet Name</strong></ion-label> -->
-          <!-- <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input> -->
-          <ion-item>
-            <ion-label color="success" position="stacked">Outlet Name</ion-label>
-            <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
-          </ion-item>
-          <ion-input type="text"></ion-input>
+          <ion-label color="success" position="stacked">Outlet Name</ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
         </ion-item>
         <ion-item>
-          <!-- <ion-label><strong>Price</strong></ion-label> -->
-          <!-- <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input> -->
-          <ion-item>
-            <ion-label  color="success" position="stacked">Price</ion-label>
-            <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
-          </ion-item>
-          <ion-input type="number"></ion-input>
+          <ion-label  color="success" position="stacked">Price</ion-label>
+          <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
         </ion-item>
       </ion-card-content>
-    </ion-card-content>
+    </ng-template>
   </ion-card>
 
 
 
   <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="button-color" routerLink="../my-listings-add">
-<!--     <ion-fab-button class="button-color" > -->
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
