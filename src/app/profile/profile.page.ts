@@ -27,8 +27,10 @@ export class ProfilePage implements OnInit {
   uid: string;
   backupProfList = [];
   isUser: boolean;
+  isPath: boolean;
   userData: UserData;
   fileUrl: any;
+  uname: string;
 
   // Upload Task
   task: AngularFireUploadTask;
@@ -47,6 +49,8 @@ export class ProfilePage implements OnInit {
   isUploading: boolean;
   isUploaded: boolean;
 
+  private basePath = '/uploads';
+
   constructor(
     private fbAuthService: AuthenticationService,
     public firebaseService: FirebaseUserService,
@@ -55,10 +59,12 @@ export class ProfilePage implements OnInit {
   ) {
     this.uid = localStorage.getItem('uid');
     this.isUser = false;
+    this.isPath = false;
     this.userData = {} as UserData;
 
     this.isUploading = false;
     this.isUploaded = false;
+
   }
 
   ngOnInit() {
@@ -75,20 +81,43 @@ export class ProfilePage implements OnInit {
           user: e.payload.doc.data()['user']
       }));
 
-      console.log(this.profList);
-
-      // User Checking
-      if(this.profList[0]['user'] === this.uid) {
-        this.isUser = true;
-      }
+      // localStorage.setItem('user', this.uid);
 
       this.backupProfList = [];
+
+      if(this.profList[this.profList.length - 1]['user'] === '') {
+        this.profList[this.profList.length - 1]['user'] = this.uid;
+      }
 
       // eslint-disable-next-line @typescript-eslint/prefer-for-of
       for(let i = 0; i < this.profList.length; i++) {
         if(this.profList[i]['user'] === this.uid) {
           this.backupProfList.push(this.profList[i]);
         }
+      }
+
+      if(this.backupProfList.length === 0) {
+        this.backupProfList.push(this.profList[0]);
+        this.isUser = true;
+      }
+
+      console.log(this.backupProfList);
+
+      localStorage.setItem('uname', JSON.stringify(this.backupProfList[0]['fname']));
+      this.uname = localStorage.getItem('uname').replace(/"/g, " ");
+
+      console.log(this.uname);
+
+      // User Checking
+      if(this.backupProfList[0]['user'] === this.uid) {
+        this.isUser = true;
+      }
+
+      // Path Checking
+      if(this.backupProfList[0]['filePath'] !== '') {
+        this.isPath = true;
+      } else {
+        this.isPath = false;
       }
 
       localStorage.setItem('url', this.backupProfList[0]['filePath']);
@@ -99,9 +128,14 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  // deleteFileStorage(name: string) {
+  //   const storageRef = this.storage.storage.ref();
+  //   storageRef.child(`${this.basePath}/${name}`).delete();
+  //   console.log('Old Deleted');
+  // }
 
   async uploadFile(event: FileList) {
-    console.log('Upload method entering');
+    console.log('Uploading...');
 
     // The File object
     const file = event.item(0);
@@ -123,6 +157,14 @@ export class ProfilePage implements OnInit {
     //File reference
     const fileRef = this.storage.ref(path);
 
+    // deleting task
+    if(this.isPath) {
+      const delFileName = this.backupProfList[0]['filePath'];
+      const delRef = this.storage.refFromURL(delFileName);
+      delRef.delete();
+      console.log('Old Photo Deleted');
+    }
+
     // The main task
     this.task = this.storage.upload(path, file);
 
@@ -132,17 +174,20 @@ export class ProfilePage implements OnInit {
         // Get uploaded file storage path
         this.uploadedFileURL = fileRef.getDownloadURL().subscribe(res=>{
           let data = {
-            id: this.backupProfList['id'],
-            EditFname: this.backupProfList['fname'],
-            EditLname: this.backupProfList['lname'],
-            EditNum: this.backupProfList['num']
+            id: this.backupProfList[0]['id'],
+            EditFname: this.backupProfList[0]['fname'],
+            EditLname: this.backupProfList[0]['lname'],
+            EditNum: this.backupProfList[0]['num']
           };
           localStorage.setItem('url', res);
           this.fileUrl = localStorage.getItem('url');
 
           this.isUploading = false;
           this.isUploaded = true;
-          this.updateRecord(data);
+          this.isPath = true;
+
+          // this.updateRecord(data);
+          console.log('Photo Uploaded...');
 
         });
 
@@ -154,21 +199,18 @@ export class ProfilePage implements OnInit {
 
     this.snapshot.subscribe(
       res => {
-        console.log('no error');
+        // console.log('no error');
       }, err => {
-        console.log('error');
+        // console.log('error');
       }
     );
   }
 
 
   logoutAction() {
-    console.log('logout');
+    console.log('Logging out');
+    localStorage.removeItem('uname');
     this.fbAuthService.SignOut();
-    // ERROR => Check SignOut() - authentication.service.ts
-    // when logout is clicked directs to login page,
-    // BUT login details in there form
-    // HOW to clear the form
   }
 
   editRecord(record) {
@@ -188,16 +230,16 @@ export class ProfilePage implements OnInit {
     record['filePath'] = this.fileUrl;
     record['user'] = localStorage.getItem('uid');
     this.firebaseService.update_transaction(recordRow.id, record);
-    recordRow.isEdit = false;
-    console.log('Profile Updated');
+    // recordRow.isEdit = false;
+    console.log('Profile Updated...');
   }
 
   addRecord(data) {
-    console.log('adding works');
     this.firebaseService.add_transaction(data)
       .catch(error => {
         console.log(error);
       });
+    console.log('Details Added...');
   }
 
 }

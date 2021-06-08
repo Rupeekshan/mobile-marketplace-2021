@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
         console.log('empty list');
       }
       console.log(this.itemList);
-      console.log('reading works - Home page');
+      // console.log('reading works - Home page');
 
     }, (err: any) => {
       console.log(err);

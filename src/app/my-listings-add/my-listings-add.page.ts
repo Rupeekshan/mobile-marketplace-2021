@@ -38,32 +38,16 @@ export class MyListingsAddPage implements OnInit {
       Price: ['', [Validators.required]],
       User: localStorage.getItem('uid')
     });
-
-    // this.firebaseService.get_transactions().subscribe(data => {
-
-    //   this.userList = data.map(e => ({
-    //       id: e.payload.doc.id,
-    //       isEdit: false,
-    //       Name: e.payload.doc.data()['Name'],
-    //       Outlet: e.payload.doc.data()['Outlet'],
-    //       Price: e.payload.doc.data()['Price'],
-    //     }));
-    //   console.log(this.userList);
-    //   console.log('reading works - add-page');
-
-    // }, (err: any) => {
-    //   console.log(err);
-    // });
+    console.log(this.userForm.value['User']);
   }
 
 
   addRecord() {
-    console.log('adding works');
-    console.log(this.userForm);
     this.firebaseService.add_transaction(this.userForm.value)
       .then(resp => {
         this.userForm.reset();
         this.router.navigate(['/tabs/my-listings']);
+        console.log('Item Added...');
       })
       .catch(error => {
         console.log(error);

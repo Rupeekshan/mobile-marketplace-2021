@@ -18,7 +18,7 @@ export class AuthenticationService {
         localStorage.setItem('uid', JSON.stringify(this.userData.uid));
       }
       else{
-        localStorage.setItem('user', null);
+        // localStorage.setItem('user', null);
       }
     });
   }
@@ -33,13 +33,11 @@ export class AuthenticationService {
 
   SignOut()
   {
-    // ERROR =>
-    // when logout is clicked directs to login page,
-    // BUT login details in there form
-    // HOW to clear the form
-    localStorage.setItem('user', null);
+    // localStorage.setItem('user', null);
     localStorage.removeItem('user');
     localStorage.removeItem('uid');
+    localStorage.removeItem('url');
+    // localStorage.removeItem('uname');
     this.router.navigate(['login']);
     return this.ngFireAuth.signOut();
   }

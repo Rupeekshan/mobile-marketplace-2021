@@ -2,24 +2,20 @@
   <ion-toolbar class="theme" color= "var">
     <ion-row>
       <ion-col >
-
         <ion-title>
           <ion-icon name="restaurant"></ion-icon>
           <span> Food items</span>
         </ion-title>
-        
       </ion-col>
     </ion-row>
-    
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="bg-img"> </div>
   <ion-searchbar placeholder="Find your favourites" [(ngModel)]="term" animated="true"></ion-searchbar>
 
-  <ion-card *ngFor="let item of itemList | filter: term" > 
+  <ion-card *ngFor="let item of itemList | filter: term">
       <ion-row>
         <ion-col>
           <ion-card-header>
@@ -29,7 +25,7 @@
         </ion-col>
         <ion-col size=3>
           <ion-card-content>
-            <ion-badge color="danger">
+            <ion-badge class="home-price-badge">
               <small>Rs. </small>
               <h1>{{item.Price}}</h1>
             </ion-badge>

@@ -1,4 +1,5 @@
 <ion-content class="ion-padding">
+  <div class="bg-img"> </div>
   <ion-slides mode="md" [options]="slideOpts">
     <ion-slide>
       <ion-button (click)="back()" fill="clear" class="backBtn">
@@ -23,7 +24,7 @@
 
           <ion-row>
             <ion-col>
-            <ion-button class="btn_class" [disabled]="!registration_form.valid" color="secondary"  type="submit" (click)="signUp(registration_form.value)" expand="block">Register</ion-button>
+            <ion-button class="theme btn_class" color="var" [disabled]="!registration_form.valid" type="submit" (click)="signUp(registration_form.value)" expand="block">Register</ion-button>
             </ion-col>
           </ion-row>
         </form>

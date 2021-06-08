@@ -1,23 +1,25 @@
 <ion-content>
+  <div class="bg-img"> </div>
   <div class="login-logo">
     <img src="../assets/logo4.png" class="logo_icon">
     <p class="login-name">Food Delivery Chain </p>
-    <p class="subTitle">Enter your login detail to access your account</p>
+    <p class="subTitle">Enter your login detail to <br> access your account</p>
   </div>
+  <div class="ion-margin">
   <form #loginForm="ngForm">
     <ion-list lines="none">
       <ion-item lines="none">
         <ion-input [(ngModel)]="email" placeholder="Email" name="email" required>
-  
+
         </ion-input>
       </ion-item>
       <ion-item lines="none">
         <ion-input [(ngModel)]="password" placeholder="Password" name="password"  type="password" required>
-  
+
         </ion-input>
       </ion-item>
     </ion-list>
-  
+
     <ion-row class="Ion-no-margin ion-no-padding">
       <ion-col class="Ion-no-margin ion-no-padding">
         <ion-button id="theme" class="theme" color= "var" (click)="onLogin(loginForm)" type="submit" expand="block">
@@ -27,9 +29,10 @@
       </ion-col>
     </ion-row>
   </form>
+</div>
   <p class="createAcc" (click)="register()">Don't have an account?
     <span class="registerTag">Sign up</span>
   </p>
-  
+
   </ion-content>
-  
+

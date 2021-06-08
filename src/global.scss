@@ -26,14 +26,56 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 :root {
-  --ion-color-theme: 98, 47, 100;
+  --ion-color-theme: rgb(198, 47, 100);
 }
 
 .theme {
-  background-color: rgb(198, 47, 100);
+  background-color: var(--ion-color-theme);
 }
 
 .button-color {
-    --background: rgb(198, 47, 100);
+    --background: var(--ion-color-theme);
     --border-radius: 30px;
+}
+
+.shop {
+  color: rgb(167, 165, 165);
+}
+
+.title {
+  color: white;
+}
+
+.home-price-badge {
+  color: white;
+  background-color: var(--ion-color-theme);
+  min-width: 50px;
+}
+
+.listing-price-badge {
+  color: white;
+  background-color: var(--ion-color-theme);
+  min-width: 70px;
+}
+
+.ion-card-subtitle {
+  color: var(--ion-color-theme);
+}
+
+.Des {
+  // color: rgb(255, 255, 255);
+  // font-weight: 500;
+}
+
+.bg-img {
+  background-image: url(assets/food-patterns-bg.jpg);
+
+  background-size: cover;
+  opacity: 0.06;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }

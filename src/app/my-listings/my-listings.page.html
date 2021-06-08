@@ -1,77 +1,67 @@
-<ion-header>
+<ion-header class="title">
   <ion-toolbar class="theme" color= "var">
     <ion-row>
-      <ion-col >
-
-        <ion-title><ion-icon  name="clipboard"></ion-icon> 
-          <span> My Listings</span></ion-title>
-        
+      <ion-col>
+        <ion-title>
+          <ion-icon  name="clipboard"></ion-icon>
+          <span> My Listings</span>
+        </ion-title>
       </ion-col>
     </ion-row>
-    
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card *ngFor="let item of backupItemList"> -->
-  <ion-card >
-    <!-- <span *ngIf="!item.isEdit; else elseBlock"> -->
-    <span>
+  <div class="bg-img"> </div>
+  <ion-card *ngFor="let item of backupItemList">
+    <span *ngIf="!item.isEdit; else elseBlock">
       <ion-card-content>
-        <ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col align-items-center>
+            <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
+          </ion-col>
+          <ion-col size="3">
+            <ion-badge class="listing-price-badge">
+              <h2>
+                <small>Rs. </small>
+                {{item.Price}}
+              </h2>
+            </ion-badge>
+          </ion-col>
+        </ion-row>
+        <ion-row  class="ion-align-items-center">
           <ion-col>
-            <ion-card-header>
-              <!-- <ion-card-subtitle>{{item.Outlet}}</ion-card-subtitle>
-              <ion-card-title>{{item.Name}}</ion-card-title> -->
-
-              <ion-card-subtitle>datas</ion-card-subtitle>
-              <ion-card-title>Item</ion-card-title>
-              
-            </ion-card-header>
-            <ion-card-content>
-              <ion-badge size="2" class="theme">
-                
-                <!-- {{item.Price}} -->
-                <h2>
-                  <small>Rs. </small>
-                  400
-                </h2>
-              </ion-badge>
-            </ion-card-content>
+            <ion-card-title class="Des">{{item.Name}}</ion-card-title>
           </ion-col>
           <ion-col size="2">
-            <ion-button  shape="round" (click)="editRecord(item)">
+            <ion-button  shape="round" fill="outline" size="small" (click)="editRecord(item)">
               <ion-icon name="pencil-outline"></ion-icon>
             </ion-button>
           </ion-col>
           <ion-col size="2">
-            <ion-button color="danger" shape="round" (click)="removeRecord(item.id)">
-              <ion-icon name="trash"></ion-icon>
+            <ion-button color="danger" shape="round" fill="outline" size="small" (click)="removeRecord(item.id)">
+              <ion-icon name="trash" (click)="removeRecord(item.id)"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
       </ion-card-content>
     </span>
 
-
-    <!-- <ng-template #elseBlock> -->
-    <ion-card-content>
-    
+    <ng-template #elseBlock>
       <ion-card-header>
         <ion-card-title>
           <ion-grid>
             <ion-row>
           
               <ion-col >
-                <!-- <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false"> -->
-                <ion-button fill="solid" color="danger" size="small">
+                <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
+<!--                 <ion-button fill="solid" color="danger" size="small"> -->
                   Cancel
                 </ion-button>
               </ion-col>
               <ion-col>
-                <!-- <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)"> -->
-                <ion-button fill="solid" color="success" size="small">
+                <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)">
+<!--                 <ion-button fill="solid" color="success" size="small"> -->
                   Update
                 </ion-button>
               </ion-col>
@@ -84,8 +74,8 @@
           <!-- <ion-label><strong>Item Name</strong></ion-label> -->
           <!-- <ion-input type="text" [(ngModel)]="item.EditName"></ion-input> -->
           <ion-item>
-            <ion-label color="success" position="stacked">Enter the shop</ion-label>
-            <ion-input></ion-input>
+            <ion-label color="success" position="stacked">Item Name</ion-label>
+            <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
           </ion-item>
           <ion-input type="text"></ion-input>
         </ion-item>
@@ -93,8 +83,8 @@
           <!-- <ion-label><strong>Outlet Name</strong></ion-label> -->
           <!-- <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input> -->
           <ion-item>
-            <ion-label color="success" position="stacked">Enter the item</ion-label>
-            <ion-input></ion-input>
+            <ion-label color="success" position="stacked">Outlet Name</ion-label>
+            <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
           </ion-item>
           <ion-input type="text"></ion-input>
         </ion-item>
@@ -102,8 +92,8 @@
           <!-- <ion-label><strong>Price</strong></ion-label> -->
           <!-- <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input> -->
           <ion-item>
-            <ion-label  color="success" position="stacked">Enter the price</ion-label>
-            <ion-input></ion-input>
+            <ion-label  color="success" position="stacked">Price</ion-label>
+            <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
           </ion-item>
           <ion-input type="number"></ion-input>
         </ion-item>
@@ -114,8 +104,8 @@
 
 
   <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
-    <!-- <ion-fab-button color="tertiary" routerLink="../my-listings-add"> -->
-    <ion-fab-button class="button-color" >
+    <ion-fab-button class="button-color" routerLink="../my-listings-add">
+<!--     <ion-fab-button class="button-color" > -->
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

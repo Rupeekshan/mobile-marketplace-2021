@@ -49,11 +49,9 @@ export class MyListingsPage implements OnInit {
         console.log('empty listing');
       }
 
-      console.log(this.backupItemList);
-
       // console.log(this.itemList);
       // console.log(localStorage.getItem('uid'));
-      console.log('reading works - listing page');
+      // console.log('reading works - listing page');
 
     }, (err: any) => {
       console.log(err);
@@ -63,7 +61,7 @@ export class MyListingsPage implements OnInit {
 
   removeRecord(rowID) {
     this.firebaseService.delete_transaction(rowID);
-    console.log('Item Deleted');
+    console.log('Item Deleted...');
   }
 
   editRecord(record) {
@@ -81,7 +79,8 @@ export class MyListingsPage implements OnInit {
     record['User'] = localStorage.getItem('uid');
     this.firebaseService.update_transaction(recordRow.id, record);
     recordRow.isEdit = false;
-    console.log('Item Updated');
+    console.log('Item Updated...');
+    console.log(this.backupItemList);
   }
 
 }

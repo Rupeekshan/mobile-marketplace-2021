@@ -27,7 +27,7 @@
   height: 30px;
   border-radius: 25px;
   // background: linear-gradient(40deg, #da4b46, #e6e6ee);
-  background: #da4b46;
+  background: var(--ion-color-theme);
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
@@ -49,4 +49,16 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.theme ion-icon {
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.chng-clr {
+  font-size: small;
+  font-weight: 600;
+  color: rgb(224, 136, 167);
+  border-left: 5px solid lightgrey;
 }

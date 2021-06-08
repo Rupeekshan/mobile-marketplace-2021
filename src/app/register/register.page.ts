@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseUserService } from '../services/firebase-user.service';
 
 @Component({
   selector: 'app-register',
@@ -33,9 +34,9 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     public authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    public router: Router
+    public router: Router,
+    private firebaseService: FirebaseUserService
   ) {
-
 
     this.hideResend = false;
 
@@ -53,13 +54,6 @@ export class RegisterPage implements OnInit {
 
   }
 
-  sendEmailVerification() {
-    this.authService.getUser().subscribe((user) => {
-      user.sendEmailVerification().then((result) => {
-
-      });
-    });
-  }
 
   ngOnInit() {
     this.registration_form = this.formBuilder.group({
@@ -86,28 +80,37 @@ export class RegisterPage implements OnInit {
 
       this.authService.getUser().subscribe(result => {
         this.currentUser = result;
-      if (this.currentUser) {
-        this.email = this.currentUser.email;
-        this.currentUser.reload();
-        console.log('email', this.currentUser.emailVerified);
-        this.hasVerifiedEmail = this.currentUser.emailVerified;
-        if (this.hasVerifiedEmail) {
-          //this.authService.setEmailVerified(this.hasVerifiedEmail, this.currentUser.uid, this.currentUser);
-          this.stopInterval = true;
-          clearInterval(this.interval);
-          this.navCtrl.navigateRoot(['']);
+        if (this.currentUser) {
+          this.email = this.currentUser.email;
+          this.currentUser.reload();
+          console.log('email', this.currentUser.emailVerified);
+          this.hasVerifiedEmail = this.currentUser.emailVerified;
+          if (this.hasVerifiedEmail) {
+            //this.authService.setEmailVerified(this.hasVerifiedEmail, this.currentUser.uid, this.currentUser);
+            this.stopInterval = true;
+            clearInterval(this.interval);
+            console.log('user verified');
+            this.router.navigate(['']);
+            // this.navCtrl.navigateRoot(['']);
+          }
         }
-      }
-    });
+      });
 
+    }, 5000);
+    if (this.stopInterval) {
+      clearInterval(this.interval);
+    }
 
-
-
-  }, 5000);
-  if (this.stopInterval) {
-    clearInterval(this.interval);
   }
 
+
+
+  sendEmailVerification() {
+    this.authService.getUser().subscribe((user) => {
+      user.sendEmailVerification().then((result) => {
+
+      });
+    });
   }
 
   passwordMatchValidator(frm: FormGroup) {
@@ -120,6 +123,15 @@ export class RegisterPage implements OnInit {
       .then((res) => {
         this.sendEmailVerification();
         this.goNext();
+        let data = {
+          fname: '',
+          lname: '',
+          num: '',
+          user: '',
+          filePath: ''
+        };
+        this.firebaseService.add_transaction(data);
+        console.log('USER Added...');
       }).catch((error) => {
         window.alert(error.message);
       });
