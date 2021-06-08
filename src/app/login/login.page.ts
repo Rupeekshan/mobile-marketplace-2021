@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable eqeqeq */
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -25,10 +26,11 @@ export class LoginPage implements OnInit {
       //call authentication service method to login
       this.authService.SignIn(this.email, this.password)
         .then((results)=>{
-          console.log('Logged in');
           if(results.user && results.user.emailVerified){
-            console.log(results.user);
-            this.router.navigateByUrl('');
+            // console.log(results.user);
+            console.log('Logging in');
+            this.router.navigateByUrl('/tabs/home');
+            // form.reset();
           }
           else{
             this.router.navigateByUrl('/register');
@@ -44,6 +46,8 @@ export class LoginPage implements OnInit {
             this.errorMessage = error.message;
           }
         });
+
+        this.router.navigateByUrl('/tabs/home');
     }
 
   }

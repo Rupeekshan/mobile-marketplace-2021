@@ -2,19 +2,22 @@
   <ion-toolbar class="theme" color= "var">
     <ion-title>
       <ion-icon name="person-sharp" ></ion-icon>
-      <span>Profile</span>
+      <!-- <span><small>Hi, </small><b>{{uname}}</b></span> -->
+      <span><small>Hi, </small><b>{{uname}}</b></span>
     </ion-title>
     <ion-button slot="end" color="warning" (click)="logoutAction()">Log out</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngFor="let data of profList">
+<ion-content *ngFor="let data of backupProfList">
+  <div class="bg-img"> </div>
   <ion-card *ngIf="isUser">
     <ion-card-content>
       <span *ngIf="!data.isEdit; else elseBlock">
         <ion-row class="img-card">
-          <img [src]= "data.filePath" class="img-center" />
-        </ion-row>
+          <img [src]= "data.filePath" class="img-center" *ngIf="isPath"/>
+          <img src= "../../assets/icon/favicon.png" class="img-center" *ngIf="!isPath"/>
+      </ion-row>
 
         <ion-row>
           <ion-list lines="full" class="ion-no-margin">
@@ -40,7 +43,8 @@
       <ion-row>
         <ion-card color="light" class="ion-text-center img-card">
           <ion-card-content>
-            <img [src]="data.filePath" class="img-center" *ngIf="!isUploaded"/>
+            <img [src]= "data.filePath" class="img-center" *ngIf="!isUploaded && isPath"/>
+            <img src= "../../assets/icon/favicon.png" class="img-center" *ngIf="!isPath"/>
             <img [src]="fileUrl" class="img-center" *ngIf="isUploaded"/>
             <ion-progress-bar type="indeterminate" *ngIf="isUploading"></ion-progress-bar>
           </ion-card-content>
