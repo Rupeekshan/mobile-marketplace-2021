@@ -15,34 +15,7 @@
   <div class="bg-img"> </div>
   <ion-card *ngFor="let item of backupItemList">
     <span *ngIf="!item.isEdit; else elseBlock">
-      <!-- <ion-card-content class="ion-no-padding"> -->
-      <ion-card-content >
-        <!-- <ion-row>
-          <ion-col>
-            <ion-card-header>
-              <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
-              <ion-card-title class="Des">{{item.Name}}</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-badge size="2" class="theme">
-                <h2>
-                  <small>Rs. </small>
-                  {{item.Price}}
-                </h2>
-              </ion-badge>
-            </ion-card-content>
-          </ion-col>
-          <ion-col size="2">
-            <ion-button  shape="round" size="small" (click)="editRecord(item)">
-              <ion-icon name="pencil-outline"></ion-icon>
-            </ion-button>
-          </ion-col>
-          <ion-col size="2">
-            <ion-button color="danger" shape="round" size="small" (click)="removeRecord(item.id)">
-              <ion-icon name="trash"></ion-icon>
-            </ion-button>
-          </ion-col>
-        </ion-row> -->
+      <ion-card-content>
         <ion-row class="ion-align-items-center">
           <ion-col align-items-center>
             <ion-card-subtitle class="shop">{{item.Outlet}}</ion-card-subtitle>
@@ -74,23 +47,21 @@
       </ion-card-content>
     </span>
 
-
     <ng-template #elseBlock>
-
       <ion-card-header>
         <ion-card-title>
           <ion-grid>
             <ion-row>
-              <ion-col>
-                Edit
-              </ion-col>
-              <ion-col>
+          
+              <ion-col >
                 <ion-button fill="solid" color="medium" size="small" (click)="item.isEdit = false">
+<!--                 <ion-button fill="solid" color="danger" size="small"> -->
                   Cancel
                 </ion-button>
               </ion-col>
               <ion-col>
                 <ion-button fill="solid" color="success" size="small" (click)="updateRecord(item)">
+<!--                 <ion-button fill="solid" color="success" size="small"> -->
                   Update
                 </ion-button>
               </ion-col>
@@ -100,23 +71,41 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label><strong>Item Name</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
+          <!-- <ion-label><strong>Item Name</strong></ion-label> -->
+          <!-- <ion-input type="text" [(ngModel)]="item.EditName"></ion-input> -->
+          <ion-item>
+            <ion-label color="success" position="stacked">Item Name</ion-label>
+            <ion-input type="text" [(ngModel)]="item.EditName"></ion-input>
+          </ion-item>
+          <ion-input type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Outlet Name</strong></ion-label>
-          <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
+          <!-- <ion-label><strong>Outlet Name</strong></ion-label> -->
+          <!-- <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input> -->
+          <ion-item>
+            <ion-label color="success" position="stacked">Outlet Name</ion-label>
+            <ion-input type="text" [(ngModel)]="item.EditOutlet"></ion-input>
+          </ion-item>
+          <ion-input type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label><strong>Price</strong></ion-label>
-          <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
+          <!-- <ion-label><strong>Price</strong></ion-label> -->
+          <!-- <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input> -->
+          <ion-item>
+            <ion-label  color="success" position="stacked">Price</ion-label>
+            <ion-input type="number" [(ngModel)]="item.EditPrice"></ion-input>
+          </ion-item>
+          <ion-input type="number"></ion-input>
         </ion-item>
       </ion-card-content>
-    </ng-template>
+    </ion-card-content>
   </ion-card>
+
+
 
   <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="button-color" routerLink="../my-listings-add">
+<!--     <ion-fab-button class="button-color" > -->
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
